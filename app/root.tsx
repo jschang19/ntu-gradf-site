@@ -11,6 +11,7 @@ import type { Route } from './+types/root';
 import './app.css';
 import AppHeader from './components/Header';
 import AppFooter from './components/Footer';
+import { GoogleAnalytics } from './components/GoogleAnalytics';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -40,6 +41,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           {children}
         </div>
         <AppFooter />
+        <GoogleAnalytics measurementId="G-XQLHHPR0H5" />
         <ScrollRestoration />
         <Scripts />
       </body>
