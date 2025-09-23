@@ -17,7 +17,7 @@ export default function Timeline({ events, className = '' }: TimelineProps) {
   return (
     <div className={`w-full ${className}`}>
       {/* Desktop horizontal layout (lg and up) */}
-      <div className="hidden lg:block">
+      <div className="hidden md:block">
         <div className="relative pt-6">
           {/* Horizontal line - positioned to go through center of nodes */}
           <div className="absolute top-10 left-4 right-4 h-0.5 bg-gray-300 z-0"></div>
@@ -51,7 +51,7 @@ export default function Timeline({ events, className = '' }: TimelineProps) {
       </div>
 
       {/* Mobile/tablet vertical layout (below lg) */}
-      <div className="lg:hidden">
+      <div className="md:hidden">
         <div className="relative">
           {/* Vertical line */}
           <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-300"></div>
