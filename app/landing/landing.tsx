@@ -82,7 +82,7 @@ export function Landing() {
             </div>
             <PopoverContent className="max-w-[400px] p-0" align="start">
               <Command>
-                <CommandInput placeholder="輸入系所代碼、名稱" className="h-9" />
+                <CommandInput placeholder="輸入系所代碼、名稱" className="h-9" autoFocus={false} />
                 <CommandList className="max-h-[400px]">
                   <CommandEmpty>沒有找到系所</CommandEmpty>
                   <CollegeCommandGroup
