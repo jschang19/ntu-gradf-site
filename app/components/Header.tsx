@@ -34,7 +34,10 @@ export default function Header() {
         <div className="grid grid-cols-subgrid col-span-2">
           <div className="col-start-2 mx-auto">
             <Link to="/" className="font-medium text-lg">
-              NTU 碩士甄試招生簡章
+              <div className="flex items-center gap-1">
+                <img src="/images/gradf.png" alt="NTU" className="size-8" />
+                臺大碩士推甄簡章
+              </div>
             </Link>
           </div>
         </div>
