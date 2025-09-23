@@ -44,11 +44,12 @@ export default function CriteriaColumn({ program }: {program: Program}) {
           name="歷屆錄取概況"
           icon={<IconDocument />}
           iconBackground="bg-[#464789]"
+          className="px-0 max-w-2xl"
         >
           <div className="overflow-x-auto">
             {
               program.historical_data ? (
-                <table className="w-full max-w-[350px]">
+                <table className="w-full max-sm:max-w-2xl max-w-full">
                   <thead>
                     <tr className="border-b hover:bg-[#f2f2f2]">
                       <th className="text-left py-2 px-3 font-medium text-sm">年度</th>

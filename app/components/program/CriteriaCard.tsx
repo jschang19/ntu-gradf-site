@@ -1,6 +1,7 @@
 import { Card, CardHeader, CardTitle, CardContent } from '~/components/ui/card';
+import { cn } from '~/lib/utils';
 
-export default function CriteriaCard({ name, icon, iconBackground, children, disabled }: { name: string, icon: React.ReactNode, iconBackground: string, children?: React.ReactNode, disabled?: boolean }) {
+export default function CriteriaCard({ name, icon, iconBackground, children, disabled, className }: { name: string, icon: React.ReactNode, iconBackground: string, children?: React.ReactNode, disabled?: boolean, className?: string }) {
   return (
     <Card className={`shadow-none rounded-md gap-4 py-4 ring-0 border-none px-0 ${disabled ? 'opacity-50' : ''}`}>
       <CardHeader className='px-0'>
@@ -9,7 +10,7 @@ export default function CriteriaCard({ name, icon, iconBackground, children, dis
           {name}
         </CardTitle>
       </CardHeader>
-      <CardContent className='pl-[2.25rem]'>
+      <CardContent className={cn(`pl-[2.25rem] w-full ${className}`)}>
         {children}
       </CardContent>
     </Card>
