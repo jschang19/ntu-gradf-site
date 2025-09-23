@@ -27,6 +27,10 @@ export default function Header() {
       to: 'https://exam.aca.ntu.edu.tw/graf/',
       href: 'https://exam.aca.ntu.edu.tw/graf/',
     },
+    {
+      label: 'Special Thanks',
+      to: '/special-thanks',
+    },
   ];
   return (
     <header className="w-full h-14 bg-white/95 sticky top-0 z-50 backdrop-blur-sm flex-shrink-0 border-b">
