@@ -1,12 +1,12 @@
 import CriteriaCard from './CriteriaCard';
-import IconDocument from '~/components/icons/document';
+import IconChat from '~/components/icons/chat';
 import type { EvaluationCriterias } from '~/types/program';
 
 export default function InterviewCriteriaCard({ criteria }: { criteria: EvaluationCriterias['interview'] }) {
   return (
     <CriteriaCard
       name={`口試  ${criteria.percentage ? criteria.percentage * 100 + '%' : '未指定'}`}
-      icon={<IconDocument />}
+      icon={<IconChat />}
       iconBackground="bg-[#933244]"
       disabled={criteria.percentage === 0}
     >

@@ -1,12 +1,12 @@
 import CriteriaCard from './CriteriaCard';
-import IconDocument from '~/components/icons/document';
+import IconPen from '~/components/icons/pen';
 import type { EvaluationCriterias } from '~/types/program';
 
 export default function DocumentCriteriaCard({ criteria }: { criteria: EvaluationCriterias['exam'] }) {
   return (
     <CriteriaCard
       name={`筆試  ${criteria.percentage ? criteria.percentage * 100 + '%' : '未指定'}`}
-      icon={<IconDocument />}
+      icon={<IconPen />}
       iconBackground="bg-[#933244]"
       disabled={criteria.percentage === 0}
     >

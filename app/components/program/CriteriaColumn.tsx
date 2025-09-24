@@ -1,9 +1,11 @@
 import type { Program } from '~/types/program';
 import CriteriaCard from './CriteriaCard';
-import IconDocument from '~/components/icons/document';
 import DocumentCriteriaCard from './DocumentCriteriaCard';
 import ExamCriteriaCard from './ExamCriteriaCard';
 import InterviewCriteriaCard from './InterviewCriteriaCard';
+import IconInformation from '~/components/icons/information';
+import IconGate from '~/components/icons/gate';
+import IconPiechart from '~/components/icons/piechart';
 import IconLink from '~/components/icons/link';
 
 import { Link } from 'react-router';
@@ -17,7 +19,7 @@ export default function CriteriaColumn({ program }: {program: Program}) {
       <div className="flex flex-col max-md:py-4">
         <CriteriaCard
           name="報名資格附加規定"
-          icon={<IconDocument />}
+          icon={<IconGate />}
           iconBackground="bg-[#464789]"
         >
           <p className="text-muted-foreground">{formattedApplicationCriteria ?? '原簡章無此項目'}</p>
@@ -34,7 +36,7 @@ export default function CriteriaColumn({ program }: {program: Program}) {
         />
         <CriteriaCard
           name="其他"
-          icon={<IconDocument />}
+          icon={<IconInformation />}
           iconBackground="bg-[#464789]"
         >
           <ul className="list-disc list-inside text-base text-black/70">
@@ -45,7 +47,7 @@ export default function CriteriaColumn({ program }: {program: Program}) {
         </CriteriaCard>
         <CriteriaCard
           name="歷屆錄取概況"
-          icon={<IconDocument />}
+          icon={<IconPiechart />}
           iconBackground="bg-[#464789]"
           className="px-0 max-w-2xl"
         >
