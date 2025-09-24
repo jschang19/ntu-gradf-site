@@ -3,6 +3,7 @@ import CriteriaCard from './CriteriaCard';
 import DocumentCriteriaCard from './DocumentCriteriaCard';
 import ExamCriteriaCard from './ExamCriteriaCard';
 import InterviewCriteriaCard from './InterviewCriteriaCard';
+import HistoricalDataTable from './HistoricalDataTable';
 import IconInformation from '~/components/icons/information';
 import IconGate from '~/components/icons/gate';
 import IconPiechart from '~/components/icons/piechart';
@@ -52,34 +53,7 @@ export default function CriteriaColumn({ program }: {program: Program}) {
           className="px-0 max-w-2xl"
         >
           <div className="overflow-x-auto">
-            {
-              program.historical_data ? (
-                <table className="w-full max-sm:max-w-2xl max-w-full">
-                  <thead>
-                    <tr className="border-b hover:bg-[#f2f2f2]">
-                      <th className="text-left py-2 px-3 font-medium text-sm">年度</th>
-                      <th className="text-left py-2 px-3 font-medium text-sm">報名人數</th>
-                      <th className="text-left py-2 px-3 font-medium text-sm">錄取數</th>
-                      <th className="text-left py-2 px-3 font-medium text-sm">錄取率</th>
-                      <th className="text-left py-2 px-3 font-medium text-sm">最低錄取分數</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {program.historical_data.map((data) => (
-                      <tr key={data.year} className="border-b hover:bg-[#f2f2f2]">
-                        <td className="py-2 px-3 text-sm">{data.year}</td>
-                        <td className="py-2 px-3 text-sm">{data.application_num}</td>
-                        <td className="py-2 px-3 text-sm">{data.admission_num}</td>
-                        <td className="py-2 px-3 text-sm">{(data.recruiting_rate * 100).toFixed(1)}%</td>
-                        <td className="py-2 px-3 text-sm">{data.baseline_score}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              ) : (
-                <p className="text-muted-foreground py-2">尚未有歷屆錄取資料</p>
-              )
-            }
+            <HistoricalDataTable historicalData={program.historical_data} />
           </div>
         </CriteriaCard>
         <CriteriaCard
