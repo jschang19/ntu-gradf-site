@@ -11,7 +11,6 @@ import type { Route } from './+types/root';
 import './app.css';
 import AppHeader from './components/Header';
 import AppFooter from './components/Footer';
-import { GoogleAnalytics } from './components/GoogleAnalytics';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://www.googletagmanager.com' },
@@ -33,7 +32,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
           {children}
         </div>
         <AppFooter />
-        <GoogleAnalytics measurementId="G-XQLHHPR0H5" />
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-XQLHHPR0H5" async />
+        <script dangerouslySetInnerHTML={{ __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-XQLHHPR0H5');
+        ` }}
+        />
         <ScrollRestoration />
         <Scripts />
       </body>
