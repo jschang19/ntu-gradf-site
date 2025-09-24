@@ -39,7 +39,7 @@ export default function Header() {
           <div className="col-start-2 mx-auto">
             <Link to="/" className="font-medium text-lg">
               <div className="flex items-center gap-1">
-                <img src="/images/gradf.png" alt="NTU" className="size-8" />
+                <img src="/images/gradf.webp" alt="NTU" className="size-8" />
                 臺大碩士推甄簡章
               </div>
             </Link>
