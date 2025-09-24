@@ -54,7 +54,7 @@ export default function Timeline({ events, className = '' }: TimelineProps) {
       <div className="md:hidden">
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+          <div className="absolute left-[15px] top-0 bottom-0 w-0.5 bg-gray-300"></div>
 
           {/* Events container */}
           <div className="space-y-8">
