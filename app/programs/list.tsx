@@ -1,71 +1,75 @@
 import { useLoaderData } from 'react-router';
-import type { Route } from './+types/search';
+import type { LoaderArgs, LoaderData } from '../list/+types/list';
 import { Link } from 'react-router';
 import { Badge } from '~/components/ui/badge';
 import { Button } from '~/components/ui/button';
 import type { MetaFunction } from 'react-router';
+import { createClient } from '~/lib/supabase/server';
 
 export const meta: MetaFunction = () => {
 
   return [
-    { title: '系所查詢結果' },
-    { name: 'description', content: '系所查詢結果' },
+    { title: '所有系所 - 115 學年度碩士甄試招生簡章查詢網（ 非官方 ）' },
+    { name: 'description', content: '所有碩士系所簡章資訊 - 115 學年度碩士甄試招生簡章查詢網（ 非官方 ）' },
   ];
 };
 
-export const loader = async ({ request }: Route.LoaderArgs) => {
+export const loader = async ({ request }: LoaderArgs): Promise<LoaderData> => {
   const url = new URL(request.url);
   const department = url.searchParams.get('department');
 
-  // Here you would typically fetch data based on the department
-  // For now, using example data
-  const exampleData = [
-    {
-      name: '圖書資訊學系碩士班',
-      group: '甲組',
-      code: '1070',
-      recruiting_num: 6,
-      evaluation_criteria: {
-        materials: {
-          percentage: 0.4,
-        },
-        exam: {
-          percentage: 0.2,
-        },
-        interview: {
-          percentage: 0.4,
-        },
+  const { supabase } = createClient(request);
+
+  // Select only the required columns for the list page
+  const { data: programs, error } = await supabase
+    .from('programs')
+    .select(`
+      name:name,
+      group:group,
+      code,
+      recruiting_num:recruiting_num,
+      announce_batch:announce_batch,
+      material_percentage:material_criterias->percentage,
+      exam_percentage:exam_criterias->percentage,
+      interview_percentage:interview_criterias->percentage`)
+    .order('code', { ascending: true });
+
+  if (error) {
+    return {
+      department,
+      programs: [],
+    };
+  }
+
+  // Transform the data to match the expected structure
+  // Since we're using JSONB -> operator, the percentage values are returned directly
+  const transformedPrograms = programs?.map(program => ({
+    name: program.name,
+    group: program.group,
+    code: program.code,
+    recruiting_num: program.recruiting_num,
+    announce_batch: program.announce_batch,
+    evaluation_criteria: {
+      materials: {
+        percentage: program.material_percentage ?? null,
       },
-      announce_batch: 1,
-    },
-    {
-      name: '圖書資訊學系碩士班',
-      group: '乙組',
-      code: '1071',
-      recruiting_num: 6,
-      evaluation_criteria: {
-        materials: {
-          percentage: 0.4,
-        },
-        exam: {
-          percentage: 0.2,
-        },
-        interview: {
-          percentage: 0.4,
-        },
+      exam: {
+        percentage: program.exam_percentage ?? null,
       },
-      announce_batch: 2,
+      interview: {
+        percentage: program.interview_percentage ?? null,
+      },
     },
-  ];
+  })) ?? [];
 
   return {
     department,
-    programs: exampleData,
+    programs: transformedPrograms,
   };
 };
 
 function formatPercentageString(percentage: number | null) {
-  if (percentage === null) {
+  if (percentage === 0 || percentage === null) {
     return '--';
   }
   return (percentage * 100).toFixed(0) + '%';

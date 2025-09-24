@@ -4,6 +4,9 @@ import IconDocument from '~/components/icons/document';
 import DocumentCriteriaCard from './DocumentCriteriaCard';
 import ExamCriteriaCard from './ExamCriteriaCard';
 import InterviewCriteriaCard from './InterviewCriteriaCard';
+import IconLink from '~/components/icons/link';
+
+import { Link } from 'react-router';
 
 export default function CriteriaColumn({ program }: {program: Program}) {
 
@@ -76,6 +79,13 @@ export default function CriteriaColumn({ program }: {program: Program}) {
               )
             }
           </div>
+        </CriteriaCard>
+        <CriteriaCard
+          name="相關連結"
+          icon={<IconLink />}
+          iconBackground="bg-[#464789]"
+        >
+          <Link to="/programs" className="text-blue-600 underline select-all">查看所有系所</Link>
         </CriteriaCard>
       </div>
     </div>
