@@ -1,26 +1,26 @@
-FROM node:20-alpine AS development-dependencies-env
+# Multi-stage build optimization
+FROM node:20-alpine AS base
 RUN npm install -g pnpm
-COPY . /app
 WORKDIR /app
+
+# Install all dependencies (including dev dependencies for build)
+FROM base AS dependencies
+COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
-FROM node:20-alpine AS production-dependencies-env
-RUN npm install -g pnpm
-COPY ./package.json pnpm-lock.yaml /app/
-WORKDIR /app
-RUN pnpm install --frozen-lockfile --prod
-
-FROM node:20-alpine AS build-env
-RUN npm install -g pnpm
-COPY . /app/
-COPY --from=development-dependencies-env /app/node_modules /app/node_modules
-WORKDIR /app
+# Build the application
+FROM dependencies AS build
+COPY . .
 RUN pnpm run build
 
-FROM node:20-alpine
-RUN npm install -g pnpm
-COPY ./package.json pnpm-lock.yaml /app/
-COPY --from=production-dependencies-env /app/node_modules /app/node_modules
-COPY --from=build-env /app/build /app/build
-WORKDIR /app
+# Production dependencies only
+FROM base AS production-deps
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile --prod
+
+# Final production image
+FROM base AS production
+COPY --from=production-deps /app/node_modules ./node_modules
+COPY --from=build /app/build ./build
+COPY package.json pnpm-lock.yaml ./
 CMD ["pnpm", "run", "start"]
