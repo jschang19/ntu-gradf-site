@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gradf.prepeer.app/sitemap.xml
+Sitemap: https://gradf.prepeer.app/sitemap_index.xml
