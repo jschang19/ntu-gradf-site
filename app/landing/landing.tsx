@@ -39,10 +39,10 @@ export function Landing() {
   return (
     <main className="flex flex-col items-center justify-center pt-16 pb-4 w-full">
       <div className="px-6 pt-8 w-full">
-        <h1 className="text-2xl font-bold tracking-wide text-center lg:text-4xl"><span className="text-xl lg:text-2xl">臺灣大學 115 學年度</span><br />碩士甄試招生簡章查詢</h1>
-        <p className="text-center text-sm text-muted-foreground mt-3">非官方網站，請依臺灣大學官方公告為準</p>
+        <h1 className="text-2xl font-bold tracking-wide text-center lg:text-4xl"><span className="text-xl lg:text-2xl">臺灣大學 115 學年</span><br />碩士班甄試招生簡章查詢</h1>
+        <h2 className="text-center text-base lg:text-lg text-gray-500 mt-2 lg:mt-4">簡章、考試科目、錄取分數，為你整理</h2>
         { /* Search Program */}
-        <div className="flex flex-col items-center w-full pt-5 pb-4 lg:pt-12 lg:pb-8">
+        <div className="flex flex-col items-center w-full pt-6 pb-4lg:pt-14 lg:pb-8">
           <Popover open={open} onOpenChange={setOpen}>
             <div className="relative w-full max-w-xl flex items-center">
               <PopoverTrigger asChild>
@@ -96,6 +96,7 @@ export function Landing() {
               </Command>
             </PopoverContent>
           </Popover>
+          <p className="text-center text-xs text-gray-400 mt-3">非校方網站，請依臺灣大學校方公告之資料為準</p>
         </div>
         <div className="mt-10 lg:mt-20 lg:px-32">
           <Timeline events={mockEvents} />
