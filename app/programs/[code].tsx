@@ -83,7 +83,7 @@ function formatProgramDisplayName(name: string | null, group: string | null, ide
   // if all 3 are provided, return the name and group and identity
   if (group && identity) {
     if (identity !== IDENTITY.STUDENT) {
-      return `${name}${group} - ${identity}`;
+      return `${name}${group}（${identity}）`;
     }
     return `${name}${group}`;
   }
