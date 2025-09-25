@@ -1578,3 +1578,5 @@ export const departments = [
     'href': 'https://exam.aca.ntu.edu.tw/graf/brochure/115/272.pdf',
   },
 ];
+
+export const BASE_TITLE = '臺灣大學 115 學年度碩士甄試招生簡章查詢網【網友自製】';
