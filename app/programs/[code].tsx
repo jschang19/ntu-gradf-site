@@ -5,7 +5,9 @@ import { useLoaderData } from 'react-router';
 import { createClient } from '~/lib/supabase/server';
 import { Link } from 'react-router';
 import type { Program, HistoricalData } from '~/types/program';
-import { BASE_TITLE, IDENTITY } from '~/constants';
+import { BASE_TITLE } from '~/constants';
+import formatProgramDisplayName from '~/lib/format-programe-display-name';
+import generateEducationalProgramJsonLd from '~/lib/generate-json';
 
 export const loader = async ({ request, params }: Route.LoaderArgs): Promise<Program> => {
   const { supabase } = createClient(request);
@@ -79,28 +81,15 @@ export function ErrorBoundary() {
   );
 }
 
-function formatProgramDisplayName(name: string | null, group: string | null, identity: string | null) {
-  // if all 3 are provided, return the name and group and identity
-  if (group && identity) {
-    if (identity !== IDENTITY.STUDENT) {
-      return `${name}${group}（${identity}）`;
-    }
-    return `${name}${group}`;
-  }
-
-  if (!name) {
-    return '無系所資料';
-  }
-
-  // if only name is provided, return the name
-  return name;
-}
-
 export default function ProgramDetail() {
   const programData = useLoaderData<typeof loader>();
 
   return (
     <div>
+      <script type="application/ld+json"
+        dangerouslySetInnerHTML={
+          { __html: JSON.stringify(generateEducationalProgramJsonLd(programData)) }}
+      />
       <div className="mt-8 w-custom mb-0.5 flex-col items-center space-y-1">
         <h1 className="text-2xl font-bold tracking-wide">
           國立臺灣大學<br className="block lg:hidden" />
