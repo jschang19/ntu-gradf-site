@@ -5,7 +5,7 @@ import { useLoaderData } from 'react-router';
 import { createClient } from '~/lib/supabase/server';
 import { Link } from 'react-router';
 import type { Program, HistoricalData } from '~/types/program';
-import { BASE_TITLE } from '~/constants';
+import { BASE_TITLE, IDENTITY } from '~/constants';
 
 export const loader = async ({ request, params }: Route.LoaderArgs): Promise<Program> => {
   const { supabase } = createClient(request);
@@ -51,9 +51,13 @@ export const meta = ({ loaderData }: Route.MetaArgs) => {
     ];
   }
 
+  const displayTitle = formatProgramDisplayName(loaderData.name, loaderData.group, loaderData.identity);
+
   return [
-    { title: `${loaderData.name}推甄簡章 - ${BASE_TITLE}` },
-    { name: 'description', content: `提供115年國立臺灣大學${loaderData.name}${loaderData.group ? ` ${loaderData.group}` : ''}${loaderData.identity ? ` ${loaderData.identity}` : ''}甄選簡章資料、招生名額...等，並提供114年與113年篩選分數作推甄參考` },
+    { title: `${displayTitle}甄試簡章- ${BASE_TITLE}` },
+    { name: 'description', content: `提供115年國立臺灣大學${displayTitle}甄試招生簡章資料、招生名額...等，並提供114年與113年篩選分數作推甄參考` },
+    { name: 'og:title', content: `國立臺灣大學${displayTitle}甄試簡章` },
+    { name: 'og:description', content: `彙整115學年度國立臺灣大學${displayTitle}甄試招生簡章與錄取分數資訊，供準備推甄的考生查詢` },
   ];
 };
 
@@ -75,10 +79,10 @@ export function ErrorBoundary() {
   );
 }
 
-function formatTitle(name: string | null, group: string | null, identity: string | null) {
+function formatProgramDisplayName(name: string | null, group: string | null, identity: string | null) {
   // if all 3 are provided, return the name and group and identity
   if (group && identity) {
-    if (identity === '在職') {
+    if (identity !== IDENTITY.STUDENT) {
       return `${name}${group} - ${identity}`;
     }
     return `${name}${group}`;
@@ -101,9 +105,9 @@ export default function ProgramDetail() {
         <h1 className="text-2xl font-bold tracking-wide">
           國立臺灣大學
           {
-            formatTitle(programData.name, programData.group, programData.identity)
+            formatProgramDisplayName(programData.name, programData.group, programData.identity)
           }
-          <br /><small>115 年甄選簡章</small>
+          <br /><small>115 年甄試簡章</small>
         </h1>
       </div>
       <main className="mt-4 mb-12 grow md:px-6">

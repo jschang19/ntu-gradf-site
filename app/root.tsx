@@ -23,6 +23,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="og:site_name" content="國立臺灣大學碩士推甄簡章查詢網" />
+        <meta name="og:image" content="https://gradf.prepeer.app/images/gradf.webp" />
+        <meta name="og:url" content="https://gradf.prepeer.app" />
+        <meta name="og:type" content="website" />
+        <meta name="og:locale" content="zh-TW" />
         <Meta />
         <Links />
       </head>

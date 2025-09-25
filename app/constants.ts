@@ -1580,3 +1580,9 @@ export const departments = [
 ];
 
 export const BASE_TITLE = '臺灣大學 115 學年度碩士甄試招生簡章查詢網【網友自製】';
+
+export const IDENTITY = {
+  STUDENT: '一般生',
+  IN_SERVICE: '在職生',
+  NEW_TAIWANESE: '新住民',
+};
