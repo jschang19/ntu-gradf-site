@@ -103,7 +103,7 @@ export default function ProgramDetail() {
     <div>
       <div className="mt-8 w-custom mb-0.5 flex-col items-center space-y-1">
         <h1 className="text-2xl font-bold tracking-wide">
-          國立臺灣大學<br />
+          國立臺灣大學<br className="block lg:hidden" />
           {
             formatProgramDisplayName(programData.name, programData.group, programData.identity)
           }
