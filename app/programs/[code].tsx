@@ -53,7 +53,7 @@ export const meta = ({ loaderData }: Route.MetaArgs) => {
 
   return [
     { title: `${loaderData.name}推甄簡章 - ${BASE_TITLE}` },
-    { name: 'description', content: `115 學年度 ${loaderData.name} 的簡章資訊` },
+    { name: 'description', content: `提供115年國立臺灣大學${loaderData.name}${loaderData.group ? ` ${loaderData.group}` : ''}${loaderData.identity ? ` ${loaderData.identity}` : ''}甄選簡章資料、招生名額...等，並提供114年與113年篩選分數作推甄參考` },
   ];
 };
 
