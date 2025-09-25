@@ -11,6 +11,8 @@ export const meta: MetaFunction = () => {
   return [
     { title: '所有系所 - 115 學年度碩士甄試招生簡章查詢網（ 非官方 ）' },
     { name: 'description', content: '所有碩士系所簡章資訊 - 115 學年度碩士甄試招生簡章查詢網（ 非官方 ）' },
+    { name: 'og:title', content: '所有系所 - 國立臺灣大學碩士甄試簡章查詢網' },
+    { name: 'og:description', content: '彙整115學年度國立臺灣大學碩士甄試招生簡章與錄取分數資訊，供準備推甄的考生查詢' },
   ];
 };
 
