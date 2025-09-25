@@ -1586,3 +1586,8 @@ export const IDENTITY = {
   IN_SERVICE: '在職生',
   NEW_TAIWANESE: '新住民',
 };
+
+export const ANNOUNCE_TIME = {
+  1: '11/5 中午 12 點前',
+  2: '11/20 中午 12 點前',
+};

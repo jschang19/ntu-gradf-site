@@ -10,6 +10,7 @@ import IconH2 from '~/components/icons/h2';
 import IconComputer from '~/components/icons/computer';
 import IconUpload from '~/components/icons/upload';
 import IconPrinter from '~/components/icons/printer';
+import IconGlobe from '~/components/icons/globe';
 import { CollegeCommandGroup } from '~/components/CollegeCommandGroup';
 
 import { departments } from '~/constants';
@@ -37,8 +38,8 @@ export function Landing() {
   }
 
   return (
-    <main className="flex flex-col items-center justify-center pt-16 pb-4 w-full">
-      <div className="px-6 pt-8 w-full">
+    <main className="flex flex-col items-center justify-center pt-13 pb-4 w-full">
+      <div className="px-6 w-full">
         <h1 className="text-2xl font-bold tracking-wide text-center lg:text-4xl"><span className="text-xl lg:text-2xl">臺灣大學 115 學年</span><br />碩士班甄試招生簡章查詢</h1>
         <h2 className="text-center text-base lg:text-lg text-gray-500 mt-2 lg:mt-4">簡章、考試科目、錄取分數，為你整理</h2>
         { /* Search Program */}
@@ -98,7 +99,7 @@ export function Landing() {
           </Popover>
           <p className="text-center text-xs text-gray-400 mt-3">非校方網站，請依臺灣大學校方公告之資料為準</p>
         </div>
-        <div className="mt-10 lg:mt-20 lg:px-32">
+        <div className="mt-10 lg:mt-20 lg:px-24">
           <Timeline events={mockEvents} />
         </div>
       </div>
@@ -141,5 +142,12 @@ const mockEvents = [
     title: '第二梯放榜',
     description: '當日寄送成績單與報到文件',
     icon: <IconH2 />,
+  },
+  {
+    id: '6',
+    duration: '11/25 10:00 - 11/27 24:00',
+    title: '網路報到',
+    description: '務必於規定時間內完成，逾期者取消資格',
+    icon: <IconGlobe />,
   },
 ];
