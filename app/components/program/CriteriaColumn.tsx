@@ -23,7 +23,7 @@ export default function CriteriaColumn({ program }: {program: Program}) {
           icon={<IconGate />}
           iconBackground="bg-[#464789]"
         >
-          <p className="text-muted-foreground">{formattedApplicationCriteria ?? '原簡章無此項目'}</p>
+          <p className="text-black/70">{formattedApplicationCriteria ?? '原簡章無此項目'}</p>
         </CriteriaCard>
         <DocumentCriteriaCard
           applicationMaterials={program.application_materials}
