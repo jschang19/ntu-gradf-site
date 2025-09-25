@@ -52,8 +52,8 @@ export default function generateEducationalProgramJsonLd(program: Program) {
       'credentialCategory': '碩士學位 (Master\'s Degree)',
     },
     'maximumEnrollment': program.recruiting_num,
-    'applicationStartDate': '2024-10-01', // Typical application start date for Taiwan graduate programs
-    'applicationDeadline': '2024-10-31', // Typical deadline
+    'applicationStartDate': '2025-10-01', // Typical application start date for Taiwan graduate programs
+    'applicationDeadline': '2025-10-09', // Typical deadline
     'occupationalCategory': occupationalCategory,
     'programPrerequisites': prerequisites.length > 0 ? prerequisites.join('; ') : '學士學位或同等學歷',
   };
