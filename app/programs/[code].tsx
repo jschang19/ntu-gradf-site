@@ -5,54 +5,78 @@ import { useLoaderData } from 'react-router';
 import { createClient } from '~/lib/supabase/server';
 import { Link } from 'react-router';
 import type { Program, HistoricalData } from '~/types/program';
+import { BASE_TITLE } from '~/constants';
 
 export const loader = async ({ request, params }: Route.LoaderArgs): Promise<Program> => {
   const { supabase } = createClient(request);
   const { data } = await supabase.from('programs').select('*').eq('code', params.code).maybeSingle();
+
+  // If no data found, throw a 404 response
+  if (!data || !data.name) {
+    throw new Response(null, { status: 404, statusText: 'Not Found' });
+  }
+
   return {
-    name: data?.name ?? null,
-    group: data?.group ?? null,
-    code: data?.code ?? '',
-    identity: data?.identity ?? '',
-    recruiting_num: data?.recruiting_num ?? 0,
-    application_criteria: data?.application_criteria ?? null,
-    application_materials: data?.application_materials ?? [],
+    name: data.name,
+    group: data.group ?? null,
+    code: data.code ?? '',
+    identity: data.identity ?? '',
+    recruiting_num: data.recruiting_num ?? 0,
+    application_criteria: data.application_criteria ?? null,
+    application_materials: data.application_materials ?? [],
     evaluation_criterias: {
-      materials: (data?.material_criterias as never) ?? { method: null, percentage: null, note: null },
-      exam: (data?.exam_criterias as never) ?? {
+      materials: (data.material_criterias as never) ?? { method: null, percentage: null, note: null },
+      exam: (data.exam_criterias as never) ?? {
         criteria: null, method: null, subject: null, notice: null, percentage: null, duration: { startAt: '', endAt: null }, place: null,
       },
-      interview: (data?.interview_criterias as never) ?? {
+      interview: (data.interview_criterias as never) ?? {
         criteria: null, method: null, percentage: null, notice: null, duration: { startAt: '', endAt: null }, place: null,
       },
-      others: (data?.others as string[]) ?? [],
+      others: (data.others as string[]) ?? [],
     },
-    announce_batch: data?.announce_batch ?? 1,
-    phone: data?.phone ?? '',
-    website: data?.website ?? '',
-    historical_data: (data?.historical_data as unknown as HistoricalData[]) ?? null,
+    announce_batch: data.announce_batch ?? 1,
+    phone: data.phone ?? '',
+    website: data.website ?? '',
+    historical_data: (data.historical_data as unknown as HistoricalData[]) ?? null,
   };
 };
 
-export const meta = ({ data }: Route.MetaArgs) => {
+export const meta = ({ loaderData }: Route.MetaArgs) => {
+
+  if (!loaderData) {
+    return [
+      { title: `無系所資料 - ${BASE_TITLE}` },
+      { name: 'description', content: `無系所資料 - ${BASE_TITLE}` },
+      { name: 'robots', content: 'noindex' },
+    ];
+  }
+
   return [
-    { title: `${data?.name}推甄簡章 - 臺灣大學 115 學年度碩士甄試招生簡章查詢網（ 非官方 ）` },
-    { name: 'description', content: `115 學年度 ${data?.name} 的簡章資訊` },
+    { title: `${loaderData.name}推甄簡章 - ${BASE_TITLE}` },
+    { name: 'description', content: `115 學年度 ${loaderData.name} 的簡章資訊` },
   ];
 };
 
-export default function ProgramDetail() {
-  const programData = useLoaderData<typeof loader>();
+export function ErrorBoundary() {
+  const notFoundTitle = '無系所資料';
 
-  if (programData.name === null) {
-    return (
+  return (
+    <>
+      <title>{`${notFoundTitle} - ${BASE_TITLE}`}</title>
+      <meta name="description" content={`${notFoundTitle} - ${BASE_TITLE}`} />
+      <meta name="robots" content="noindex, nofollow" />
+
       <main className="pt-16 p-4 container mx-auto h-[calc(100dvh-16px)] flex flex-col items-center justify-center gap-4">
         <h1 className="text-xl font-bold tracking-wide">沒有此系所的資料</h1>
         <p className="text-sm text-muted-foreground">請確認系所代碼是否正確，或重新查詢</p>
         <Link to="/" className="text-sm text-muted-foreground hover:text-primary">回到首頁</Link>
       </main>
-    );
-  }
+    </>
+  );
+}
+
+export default function ProgramDetail() {
+  const programData = useLoaderData<typeof loader>();
 
   return (
     <div>
