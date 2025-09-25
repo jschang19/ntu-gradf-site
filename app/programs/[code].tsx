@@ -75,14 +75,36 @@ export function ErrorBoundary() {
   );
 }
 
+function formatTitle(name: string | null, group: string | null, identity: string | null) {
+  // if all 3 are provided, return the name and group and identity
+  if (group && identity) {
+    if (identity === '在職') {
+      return `${name}${group} - ${identity}`;
+    }
+    return `${name}${group}`;
+  }
+
+  if (!name) {
+    return '無系所資料';
+  }
+
+  // if only name is provided, return the name
+  return name;
+}
+
 export default function ProgramDetail() {
   const programData = useLoaderData<typeof loader>();
 
   return (
     <div>
       <div className="mt-8 w-custom mb-0.5 flex-col items-center space-y-1">
-        <h2 className="text-2xl font-bold tracking-wide">{programData.name}</h2>
-        {programData.group && <h3 className="text-muted-foreground">{programData.group}</h3>}
+        <h1 className="text-2xl font-bold tracking-wide">
+          國立臺灣大學
+          {
+            formatTitle(programData.name, programData.group, programData.identity)
+          }
+          <br /><small>115 年甄選簡章</small>
+        </h1>
       </div>
       <main className="mt-4 mb-12 grow md:px-6">
         <div className="flex flex-col border-y bg-white text-black md:flex-row md:border md:p-4 md:pl-2 md:shadow-sm md:rounded-sm gap-2">
