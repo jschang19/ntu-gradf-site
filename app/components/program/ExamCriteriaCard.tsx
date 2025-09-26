@@ -1,8 +1,13 @@
 import CriteriaCard from './CriteriaCard';
 import IconPen from '~/components/icons/pen';
+import WebsiteLinkButton from './WebsiteLinkButton';
 import type { EvaluationCriterias } from '~/types/program';
+import { MENTIONED_SITE_KEYWORDS } from '~/constants';
 
-export default function DocumentCriteriaCard({ criteria }: { criteria: EvaluationCriterias['exam'] }) {
+export default function ExamCriteriaCard({ criteria, url }: { criteria: EvaluationCriterias['exam'], url: string | null }) {
+
+  const hasMentionedWebsite = url && MENTIONED_SITE_KEYWORDS.WEBSITE.some((keyword) => criteria.notice?.includes(keyword));
+
   return (
     <CriteriaCard
       name={`筆試  ${criteria.percentage ? criteria.percentage * 100 + '%' : '未指定'}`}
@@ -35,6 +40,10 @@ export default function DocumentCriteriaCard({ criteria }: { criteria: Evaluatio
             <h4 className='font-medium mb-2'>注意事項</h4>
             <p className='text-base text-black/70'>{criteria.notice}</p>
           </div>
+          {url && hasMentionedWebsite && (
+            <div>
+              <WebsiteLinkButton url={url} />
+            </div>)}
         </div>
       ) : null
     }

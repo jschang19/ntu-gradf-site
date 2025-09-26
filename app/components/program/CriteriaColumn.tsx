@@ -28,23 +28,30 @@ export default function CriteriaColumn({ program }: {program: Program}) {
         <DocumentCriteriaCard
           applicationMaterials={program.application_materials}
           criteria={program.evaluation_criterias.materials}
+          url={program.evaluation_criterias.materials.document_url}
         />
         <ExamCriteriaCard
           criteria={program.evaluation_criterias.exam}
+          url={program.website}
         />
         <InterviewCriteriaCard
           criteria={program.evaluation_criterias.interview}
+          url={program.website}
         />
         <CriteriaCard
           name="其他"
           icon={<IconInformation />}
           iconBackground="bg-[#464789]"
         >
-          <ul className="list-disc list-inside text-base text-black/70">
-            {program.evaluation_criterias.others.map((other) => (
-              <li key={other}>{other}</li>
-            ))}
-          </ul>
+          {program.evaluation_criterias.others.length > 0 ? (
+            <ul className="list-disc list-inside text-base text-black/70">
+              {program.evaluation_criterias.others.map((other) => (
+                <li key={other}>{other}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-black/70">原簡章無此項目</p>
+          )}
         </CriteriaCard>
         <CriteriaCard
           name="歷屆錄取概況"

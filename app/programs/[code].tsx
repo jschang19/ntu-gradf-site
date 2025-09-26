@@ -27,7 +27,7 @@ export const loader = async ({ request, params }: Route.LoaderArgs): Promise<Pro
     application_criteria: data.application_criteria ?? null,
     application_materials: data.application_materials ?? [],
     evaluation_criterias: {
-      materials: (data.material_criterias as never) ?? { method: null, percentage: null, note: null },
+      materials: (data.material_criterias as never) ?? { method: null, percentage: null, note: null, documentUrl: null },
       exam: (data.exam_criterias as never) ?? {
         criteria: null, method: null, subject: null, notice: null, percentage: null, duration: { startAt: '', endAt: null }, place: null,
       },

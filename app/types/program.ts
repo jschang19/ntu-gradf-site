@@ -7,6 +7,7 @@ export interface MaterialsEvaluation {
   method: string | null;
   percentage: number | null;
   note: string | null;
+  document_url: string | null;
 }
 
 export interface ExamEvaluation {

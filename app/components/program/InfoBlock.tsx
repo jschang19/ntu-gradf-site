@@ -12,7 +12,21 @@ export default function InfoBlock({ icon, title, content, isLink = false }: Info
         <div className="shrink-0">{icon}</div>
         <div>
           <div className="mb-0.5 text-xs text-black/60">{title}</div>
-          {isLink ? <a href={content} className="text-base text-blue-600 underline select-all">{content}</a> : <div className="text-base text-black/80 select-all">{content}</div>}
+          {isLink ? (
+            <a
+              href={content}
+              className="text-base text-blue-600 underline select-all break-all"
+              title={content}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {content}
+            </a>
+          ) : (
+            <div className="text-base text-black/80 select-all break-all">
+              {content}
+            </div>
+          )}
         </div>
       </div>
     </li>

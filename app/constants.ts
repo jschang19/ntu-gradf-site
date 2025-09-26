@@ -1591,3 +1591,7 @@ export const ANNOUNCE_TIME = {
   1: '11/5 中午 12 點前',
   2: '11/20 中午 12 點前',
 };
+
+export const MENTIONED_SITE_KEYWORDS = {
+  WEBSITE: ['本系網站', '本系網頁', '本所網站', '本所網頁'],
+};
